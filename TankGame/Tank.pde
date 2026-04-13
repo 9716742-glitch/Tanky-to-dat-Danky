@@ -1,6 +1,7 @@
 class  Tank {
   float x, y, w, h, speed, health;
-  PImage iTank;
+  PImage iTankW, iTankA, iTankS, iTankD;
+  char idir;
 
 
 
@@ -9,14 +10,21 @@ class  Tank {
     y = 100;
     w = 100;
     h = 100;
-    speed = 2.0;
+    speed = 10.0;
     health = 75.0;
-    iTank = loadImage("tank;).png");
+    iTankW = loadImage("tanky1.png");
+    iTankA = loadImage ("tanky1A.png");
+    iTankS = loadImage ("tanky1S.png");
+    iTankD = loadImage ("tanky1D.png");
+    idir = 'w';
+    idir = 'a';
+    idir = 's';
+    idir = 'd';
   }
   
   void display() {
     imageMode(CENTER);
-    image(iTank,x,y);
+    image(iTankW,x,y);
   }
 
   void move(char dir) {
