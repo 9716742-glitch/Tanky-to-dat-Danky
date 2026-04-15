@@ -1,6 +1,6 @@
 class  Obstacle {
   float x, y, w, h, speed, health;
-  PImage iTankW;
+  PImage obs1;
   char idir;
 
 
@@ -13,15 +13,19 @@ class  Obstacle {
     this.speed = speed;
     this.health = health;
     idir = 'w';
+    obs1 = loadImage("obstacle1.png");
   }
 
   void display() {
     fill(127);
-    rectMode(CENTER);
-    rect(x, y, w, h);
+    imageMode(CENTER);
+    image(obs1,x,y);
   }
 
   void move() {
-    x=x+speed;
+    y=y+speed;
+    if(x>width){
+      x = 0;
+    }
   }
 }

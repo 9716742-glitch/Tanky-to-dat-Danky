@@ -1,30 +1,34 @@
 // 1 April 2026 | TankGame By Ruby Collins-Peynaud
 Tank Michael;
-Obstacle o1;
-Obstacle o2;
-Obstacle o3;
+ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
+ArrayList<Obstacle> obstacles = new ArrayList<Obstacle>();
 PImage bg;
+int score;
 
 void setup() {
-  size(1000,1000);
+  size(1000, 1000);
+  score = 0;
   bg = loadImage("bkgd.png");
   Michael = new Tank();
-  o1 = new Obstacle(400,100,100,50,5,100);
-  o2 = new Obstacle(600,100,100,50,5,100);
-  o3 = new Obstacle(200,100,100,50,5,100);
+  obstacles.add(new Obstacle(300, 200, 100, 100, int(random(1, 10)), 10));
 }
 
 void draw() {
   background (127);
   imageMode(CENTER);
-  image(bg,0,0);
-  o1.display();
-  o1.move();
-  o2.display();
-  o2.move();
-  o3.display();
-  o3.move();
+  image(bg, 0, 0);
+  for (int i = 0; i < obstacles.size(); i++) {
+    Obstacle o = obstacles.get(i);
+    o.display();
+    o.move();
+  }
+  for (int i = 0; i < projectiles.size(); i++) {
+    Projectile p = projectiles.get(i);
+    p.display();
+    p.move();
+  }
   Michael.display();
+  scorePanel();
 }
 
 void keyPressed() {
@@ -37,4 +41,18 @@ void keyPressed() {
   } else if (key == 'd') {
     Michael.move('d');
   }
+}
+
+void mousePressed() {
+  projectiles.add(new Projectile(Michael.x, Michael.y, 4, 10));
+}
+void scorePanel() {
+  fill(127, 127);
+  rectMode(CENTER);
+  noStroke();
+  rect(width/2, 30, width, 60);
+  fill(255);
+  textSize(50);
+  textAlign(CENTER);
+  text("Score:" + score, width/2, 45);
 }
